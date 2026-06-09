@@ -1,0 +1,103 @@
+/* ============================================================
+   Theme tokens — 4 themes swapped via [data-theme="..."] on <html>
+   ------------------------------------------------------------
+   - Dark      : guide default (slate + electric violet)
+   - Light     : inverted, violet dropped for AA contrast
+   - Midnight  : true black (OLED), brighter violet
+   - Sepia     : warm cream + amber accent
+   ============================================================ */
+
+@layer base {
+  :root,
+  [data-theme='dark'] {
+    --background: 240 5% 4%;
+    --foreground: 240 5% 96%;
+    --card: 240 6% 8%;
+    --card-foreground: 240 5% 96%;
+    --popover: 240 6% 8%;
+    --popover-foreground: 240 5% 96%;
+    --secondary: 240 5% 11%;
+    --muted: 240 5% 11%;
+    --muted-foreground: 240 5% 65%;
+    --accent: 240 5% 14%;
+    --accent-foreground: 240 5% 96%;
+    --primary: 262 83% 58%;
+    --primary-foreground: 0 0% 100%;
+    --border: 240 4% 12%;
+    --input: 240 4% 12%;
+    --ring: 262 83% 58%;
+    --destructive: 0 72% 51%;
+    --success: 158 64% 40%;
+    --warning: 38 92% 50%;
+    --radius: 0.625rem;
+  }
+
+  [data-theme='light'] {
+    --background: 0 0% 100%;
+    --foreground: 240 6% 10%;
+    --card: 0 0% 98%;
+    --card-foreground: 240 6% 10%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 6% 10%;
+    --secondary: 240 5% 95%;
+    --muted: 240 5% 95%;
+    --muted-foreground: 240 4% 46%;
+    --accent: 240 5% 93%;
+    --accent-foreground: 240 6% 10%;
+    --primary: 262 83% 48%;
+    --primary-foreground: 0 0% 100%;
+    --border: 240 5% 89%;
+    --input: 240 5% 89%;
+    --ring: 262 83% 48%;
+    --destructive: 0 84% 50%;
+    --success: 158 68% 36%;
+    --warning: 38 92% 46%;
+    --radius: 0.625rem;
+  }
+
+  [data-theme='midnight'] {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 98%;
+    --card: 240 5% 3%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 5% 3%;
+    --popover-foreground: 0 0% 98%;
+    --secondary: 240 5% 6%;
+    --muted: 240 5% 6%;
+    --muted-foreground: 240 5% 70%;
+    --accent: 240 5% 8%;
+    --accent-foreground: 0 0% 98%;
+    --primary: 262 83% 70%;
+    --primary-foreground: 0 0% 100%;
+    --border: 240 4% 8%;
+    --input: 240 4% 8%;
+    --ring: 262 83% 70%;
+    --destructive: 0 80% 60%;
+    --success: 158 70% 48%;
+    --warning: 38 95% 58%;
+    --radius: 0.625rem;
+  }
+
+  [data-theme='sepia'] {
+    --background: 39 55% 92%;
+    --foreground: 30 35% 18%;
+    --card: 39 45% 87%;
+    --card-foreground: 30 35% 18%;
+    --popover: 39 45% 87%;
+    --popover-foreground: 30 35% 18%;
+    --secondary: 39 40% 82%;
+    --muted: 39 40% 82%;
+    --muted-foreground: 30 20% 38%;
+    --accent: 39 35% 78%;
+    --accent-foreground: 30 35% 18%;
+    --primary: 20 87% 40%;
+    --primary-foreground: 39 55% 96%;
+    --border: 36 35% 68%;
+    --input: 36 35% 68%;
+    --ring: 20 87% 40%;
+    --destructive: 0 65% 42%;
+    --success: 140 55% 32%;
+    --warning: 33 90% 42%;
+    --radius: 0.625rem;
+  }
+}

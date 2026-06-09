@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ResumeFit — AI Resume Analyzer</title>
+    <meta name="description" content="Beat the ATS. Land the interview. Upload your resume, paste a JD, get surgical AI feedback in under 10 seconds." />
+    <meta property="og:title" content="ResumeFit — AI Resume Analyzer" />
+    <meta property="og:description" content="Match score · missing keywords · ATS readiness · rewrite suggestions powered by Claude." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Instrument+Serif:ital@0;1&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <script>
+      (function () {
+        try {
+          var saved = JSON.parse(localStorage.getItem('app-theme'));
+          var theme = (saved && saved.state && saved.state.theme) || 'dark';
+          document.documentElement.setAttribute('data-theme', theme);
+        } catch (e) {
+          document.documentElement.setAttribute('data-theme', 'dark');
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
