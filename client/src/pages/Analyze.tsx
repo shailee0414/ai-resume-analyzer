@@ -8,7 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { useAnalyze } from '@/hooks/useAnalyze';
 import { apiErrorMessage } from '@/lib/api';
-import { analyzeSchema } from '@/schemas/analyze';
+import { analyzeSchema, JD_MIN, JD_MAX } from '@/schemas/analyze';
 
 export default function Analyze() {
   const [file, setFile] = useState<File | null>(null);
@@ -33,7 +33,8 @@ export default function Analyze() {
     );
   }
 
-  const canSubmit = !!file && jd.trim().length >= 50 && !isPending;
+  const jdLen = jd.length;
+  const canSubmit = !!file && jdLen >= JD_MIN && jdLen <= JD_MAX && !isPending;
 
   return (
     <div className="mx-auto max-w-4xl px-4 py-10">

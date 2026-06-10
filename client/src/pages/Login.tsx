@@ -3,6 +3,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { toast } from 'sonner';
+import { AxiosError } from 'axios';
 import { loginSchema, type LoginInput } from '@/schemas/auth';
 import { api, apiErrorMessage } from '@/lib/api';
 import { useAuthStore } from '@/stores/authStore';
@@ -33,7 +34,12 @@ export default function Login() {
       navigate(to, { replace: true });
     },
     onError: (err) => {
-      toast.error(apiErrorMessage(err, 'Login failed'));
+      const status = (err as AxiosError)?.response?.status;
+      if (status === 401) {
+        toast.error('Account does not exist with these credentials, please try again');
+      } else {
+        toast.error(apiErrorMessage(err, 'Login failed'));
+      }
     },
   });
 

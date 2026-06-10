@@ -11,10 +11,23 @@ import { Skeleton } from '@/components/ui/skeleton';
 import { Button } from '@/components/ui/button';
 import type { AnalysisResult } from '@/types';
 
-const fade = (delay = 0) => ({
-  initial: { opacity: 0, y: 10 },
-  animate: { opacity: 1, y: 0 },
-  transition: { duration: 0.45, delay, ease: [0.4, 0, 0.2, 1] },
+const spring = {
+  type: 'spring' as const,
+  stiffness: 220,
+  damping: 22,
+  mass: 0.9,
+};
+
+const pop = (delay = 0) => ({
+  initial: { opacity: 0, y: 16, scale: 0.96 },
+  animate: { opacity: 1, y: 0, scale: 1 },
+  transition: { ...spring, delay },
+});
+
+const chipIn = (delay = 0) => ({
+  initial: { opacity: 0, scale: 0.7 },
+  animate: { opacity: 1, scale: 1 },
+  transition: { ...spring, delay },
 });
 
 export default function Results() {
@@ -46,7 +59,7 @@ export default function Results() {
         </Link>
       </Button>
 
-      <motion.div {...fade(0)}>
+      <motion.div {...pop(0)}>
         <Card>
           <CardContent className="flex flex-col items-center gap-6 p-6 md:flex-row md:gap-8">
             <ScoreGauge score={result.score} />
@@ -60,15 +73,17 @@ export default function Results() {
       </motion.div>
 
       <div className="grid gap-4 md:grid-cols-2">
-        <motion.div {...fade(0.1)}>
+        <motion.div {...pop(0.15)}>
           <Card>
             <CardContent className="p-5">
               <div className="mb-3 font-mono text-[10px] uppercase tracking-wider text-success">
                 ✓ Strong · {result.strongKeywords.length}
               </div>
               <div className="-mt-1.5 flex flex-wrap">
-                {result.strongKeywords.map((k) => (
-                  <KeywordChip key={k} label={k} kind="strong" />
+                {result.strongKeywords.map((k, i) => (
+                  <motion.span key={k} {...chipIn(0.25 + i * 0.03)}>
+                    <KeywordChip label={k} kind="strong" />
+                  </motion.span>
                 ))}
                 {!result.strongKeywords.length && (
                   <p className="text-sm text-muted-foreground">None detected.</p>
@@ -78,15 +93,17 @@ export default function Results() {
           </Card>
         </motion.div>
 
-        <motion.div {...fade(0.2)}>
+        <motion.div {...pop(0.25)}>
           <Card>
             <CardContent className="p-5">
               <div className="mb-3 font-mono text-[10px] uppercase tracking-wider text-destructive">
                 ✗ Missing · {result.missingKeywords.length}
               </div>
               <div className="-mt-1.5 flex flex-wrap">
-                {result.missingKeywords.map((k) => (
-                  <KeywordChip key={k} label={k} kind="missing" />
+                {result.missingKeywords.map((k, i) => (
+                  <motion.span key={k} {...chipIn(0.35 + i * 0.03)}>
+                    <KeywordChip label={k} kind="missing" />
+                  </motion.span>
                 ))}
                 {!result.missingKeywords.length && (
                   <p className="text-sm text-muted-foreground">Nothing missing — nice.</p>
@@ -97,7 +114,7 @@ export default function Results() {
         </motion.div>
       </div>
 
-      <motion.div {...fade(0.3)}>
+      <motion.div {...pop(0.4)}>
         <Card>
           <CardContent className="p-5">
             <h3 className="mb-3 text-sm font-semibold">ATS readiness</h3>
@@ -106,11 +123,17 @@ export default function Results() {
         </Card>
       </motion.div>
 
-      <motion.div {...fade(0.4)} className="space-y-4">
+      <motion.div {...pop(0.55)} className="space-y-4">
         <h3 className="text-sm font-semibold">Rewrite suggestions</h3>
         <div className="grid gap-4 md:grid-cols-2">
           {result.suggestions.map((s, i) => (
-            <motion.div key={i} {...fade(0.5 + i * 0.05)}>
+            <motion.div
+              key={i}
+              initial={{ opacity: 0, y: 20, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              transition={{ ...spring, delay: 0.65 + i * 0.08 }}
+              whileHover={{ y: -3, transition: { duration: 0.15 } }}
+            >
               <SuggestionCard s={s} />
             </motion.div>
           ))}

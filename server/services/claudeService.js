@@ -3,7 +3,7 @@ import { SYSTEM_PROMPT, buildUserPrompt } from '../prompts/analyzerPrompt.js';
 import { extractJson } from '../utils/jsonExtract.js';
 import { httpError } from '../middleware/errorHandler.js';
 
-const PROVIDER = (process.env.AI_PROVIDER || 'anthropic').toLowerCase();
+const PROVIDER = (process.env.AI_PROVIDER || 'openrouter').toLowerCase();
 const MAX_TOKENS = 2000;
 
 const ANTHROPIC_MODEL = process.env.ANTHROPIC_MODEL || 'claude-sonnet-4-5';

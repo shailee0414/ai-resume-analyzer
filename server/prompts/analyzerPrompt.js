@@ -3,11 +3,16 @@ Your job is to analyze a candidate's resume against a job description and return
 
 RULES:
 - Respond with ONLY a JSON object. No prose, no markdown, no code fences.
-- Be concrete and specific. Avoid generic advice.
-- Pull keywords directly from the job description text — do not invent technologies.
+- BE CONCISE. Stay well under 1200 tokens of output.
+- Pull keywords directly from the job description — never invent technologies.
 - "score" reflects overall fit (skills, experience level, domain). Be honest, not generous.
-- "atsChecks" should include common ATS pitfalls: contact info clarity, action verbs, quantified impact, keyword density, section headers, format simplicity.
-- "suggestions" should rewrite specific bullet points to better match the JD — show the original line as "before" and the improved version as "after".`;
+- HARD CAPS on output:
+  - strongKeywords: max 8 items, each 1-3 words
+  - missingKeywords: max 8 items, each 1-3 words
+  - atsChecks: max 5 items; each "note" <= 80 characters
+  - suggestions: max 3 items; "before" and "after" each <= 160 characters; "why" <= 80 characters
+- "matchSummary": one short sentence, <= 140 characters.
+- Close every bracket. Never truncate mid-array.`;
 
 export function buildUserPrompt(resumeText, jdText) {
   return `Analyze this resume against the job description below.
@@ -18,18 +23,18 @@ ${resumeText}
 === JOB DESCRIPTION ===
 ${jdText}
 
-Respond with ONLY this JSON shape (no markdown, no commentary):
+Respond with ONLY this JSON shape (no markdown, no commentary). Stay within all hard caps:
 {
   "score": <number 0-100>,
-  "matchSummary": "<one sentence verdict>",
+  "matchSummary": "<one short sentence, <=140 chars>",
   "jobTitle": "<extracted from JD, e.g. 'Sr. Frontend Engineer at Razorpay'>",
-  "strongKeywords": ["<keyword present in BOTH resume and JD>", ...],
-  "missingKeywords": ["<keyword in JD but NOT in resume>", ...],
+  "strongKeywords": ["<keyword present in BOTH resume and JD>", "..."],
+  "missingKeywords": ["<keyword in JD but NOT in resume>", "..."],
   "atsChecks": [
-    { "label": "<short check name>", "pass": <true|false>, "note": "<one line>" }
+    { "label": "<short check name>", "pass": <true|false>, "note": "<one line, <=80 chars>" }
   ],
   "suggestions": [
-    { "area": "<bullet area, e.g. 'Experience > Project X'>", "before": "<exact original line>", "after": "<rewritten line>", "why": "<one sentence reason>" }
+    { "area": "<bullet area>", "before": "<<=160 chars>", "after": "<<=160 chars>", "why": "<<=80 chars>" }
   ]
 }`;
 }
