@@ -34,7 +34,11 @@ export interface AnalysisResult {
 export interface HistoryItem {
   _id: string;
   jobTitle: string;
-  score: number;
   matchSummary: string;
+  score: number;
+  strongKeywords: string[];
+  missingKeywords: string[];
+  atsChecks: ATSCheck[];
+  suggestions: Suggestion[];
   createdAt: string;
 }

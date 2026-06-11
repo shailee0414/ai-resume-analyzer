@@ -62,7 +62,7 @@ export default function History() {
             transition={{ ...spring, delay: 0.08 + i * 0.06 }}
             whileHover={{ y: -3, transition: { duration: 0.18 } }}
           >
-            <Link to={`/results/${item._id}`}>
+            <Link to={`/results/${item._id}`} state={{ result: { ...item, id: item._id } }}>
               <Card className="transition-colors hover:border-primary/40">
                 <CardContent className="flex items-center justify-between gap-5 p-6">
                   <div className="min-w-0 flex-1">
