@@ -23,7 +23,7 @@ router.post(
       if (!req.file) throw httpError(400, 'Resume PDF is required');
       const jd = (req.body?.jd || '').trim();
       if (!jd) throw httpError(400, 'Job description is required');
-      if (jd.length < 500) throw httpError(400, 'Job description must be at least 500 characters');
+      if (jd.length < 200) throw httpError(400, 'Job description must be at least 200 characters');
       if (jd.length > 5000) throw httpError(400, 'Job description must be at most 5000 characters');
 
       const resumeText = await extractText(req.file.buffer);

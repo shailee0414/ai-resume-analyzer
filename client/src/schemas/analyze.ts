@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const JD_MIN = 500;
+export const JD_MIN = 200;
 export const JD_MAX = 5000;
 
 export const analyzeSchema = z.object({

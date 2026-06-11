@@ -60,7 +60,7 @@ export default function Results() {
       </Button>
 
       <motion.div {...pop(0)}>
-        <Card>
+        <Card className="h-full" >
           <CardContent className="flex flex-col items-center gap-6 p-6 md:flex-row md:gap-8">
             <ScoreGauge score={result.score} />
             <div className="flex-1 text-center md:text-left">
@@ -72,9 +72,9 @@ export default function Results() {
         </Card>
       </motion.div>
 
-      <div className="grid gap-4 md:grid-cols-2">
+      <div className="grid gap-4 md:grid-cols-2 items-stretch">
         <motion.div {...pop(0.15)}>
-          <Card>
+          <Card className="h-full">
             <CardContent className="p-5">
               <div className="mb-3 font-mono text-[10px] uppercase tracking-wider text-success">
                 ✓ Strong · {result.strongKeywords.length}
@@ -125,7 +125,7 @@ export default function Results() {
 
       <motion.div {...pop(0.55)} className="space-y-4">
         <h3 className="text-sm font-semibold">Rewrite suggestions</h3>
-        <div className="grid gap-4 md:grid-cols-2">
+        <div className="grid auto-rows-fr gap-4 md:grid-cols-2 items-stretch">
           {result.suggestions.map((s, i) => (
             <motion.div
               key={i}
@@ -133,6 +133,7 @@ export default function Results() {
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ ...spring, delay: 0.65 + i * 0.08 }}
               whileHover={{ y: -3, transition: { duration: 0.15 } }}
+              className="h-full"
             >
               <SuggestionCard s={s} />
             </motion.div>

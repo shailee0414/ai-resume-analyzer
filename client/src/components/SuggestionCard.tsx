@@ -3,8 +3,8 @@ import type { Suggestion } from '@/types';
 
 export function SuggestionCard({ s }: { s: Suggestion }) {
   return (
-    <Card>
-      <CardContent className="space-y-3 p-5">
+    <Card className="h-full" >
+      <CardContent  className="flex flex-col space-y-3 p-5">
         <div className="font-mono text-[10px] uppercase tracking-wider text-primary">{s.area}</div>
         <div className="rounded-md border border-destructive/30 bg-destructive/5 p-3">
           <div className="mb-1 font-mono text-[10px] uppercase text-destructive">Before</div>

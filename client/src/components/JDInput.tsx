@@ -33,7 +33,7 @@ export function JDInput({ value, onChange }: JDInputProps) {
         value={value}
         onChange={(e) => onChange(e.target.value.slice(0, JD_MAX))}
         placeholder={`Paste the full job description here (${JD_MIN}–${JD_MAX} characters)...`}
-        className="min-h-[200px] font-mono text-[13px]"
+        className="min-h-[220px] font-mono text-[13px]"
       />
       <div className="mt-1.5 flex items-center justify-between text-xs">
         <span
